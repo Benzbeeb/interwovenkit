@@ -584,7 +584,7 @@ export function useDepositTransfer(resolution: DepositTransportSelection) {
     writeAfterPrompt({
       ...prompted,
       phase: "source_sent",
-      sourceNonce: response.nonce,
+      sourceNonce: response.nonce ?? prompted.promptPendingNonce,
       currentSourceHash: response.hash,
       originalSourceHash: response.hash,
     })
