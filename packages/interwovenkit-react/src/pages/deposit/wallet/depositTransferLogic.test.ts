@@ -117,6 +117,8 @@ describe("toBaseUnitString", () => {
     ["1.234567", "1234567"],
     ["1.2345678", "1234567"],
     ["-1", ""],
+    [".", ""],
+    [" ", ""],
     ["abc", ""],
   ])("%s → %j", (quantity, expected) => {
     expect(toBaseUnitString(quantity, 6)).toBe(expected)

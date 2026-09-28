@@ -2,6 +2,7 @@ import BigNumber from "bignumber.js"
 import { path } from "ramda"
 import { InitiaAddress, toBaseUnit } from "@initia/utils"
 import { POPUP_BLOCKED_MESSAGE, USER_REJECTED_MESSAGE } from "@/data/http"
+import { parseQuantity } from "@/lib/amountValidation"
 import { BRIDGE_QUOTE_MAX_AGE } from "../data/bridges"
 import { gteInteger, isDecimalString, isEvmTxHash, isIntegerString } from "../data/parse"
 import type { QuoteResult } from "../data/quote"
@@ -16,6 +17,7 @@ import type { DepositSessionTransaction } from "./depositSession"
 import { encodeErc20Transfer } from "./evmRpc"
 
 export function toBaseUnitString(quantity: string, decimals: number): string {
+  if (!parseQuantity(quantity)) return ""
   const amount = toBaseUnit(quantity, { decimals })
   return isIntegerString(amount) ? amount : ""
 }
